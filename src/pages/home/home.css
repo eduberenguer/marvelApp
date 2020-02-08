@@ -1,0 +1,13 @@
+
+.container-home{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10em;
+}
+.container-home img{
+    width: 15em;
+    margin-bottom: 3em;
+}

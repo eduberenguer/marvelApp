@@ -1,0 +1,23 @@
+.container-superHero{
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-superHero form .container-input-superHero{
+    width: 20em;
+}
+
+.modal-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.modal-item img{
+    width: 25em;
+    margin-bottom: 3em;
+}

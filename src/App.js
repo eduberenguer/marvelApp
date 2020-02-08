@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import red from '@material-ui/core/colors/red';
 
-import Home from '../src/components/home/Home'
-import Landing from '../src/components/landing/Landing'
-import Item from '../src/components/item/Item'
-import NotFound from '../src/components/notFound/NotFound'
-import Profile from '../src/components/profile/Profile'
+import Home from './pages/home/Home'
+import Landing from './pages/landing/Landing'
+import Item from './pages/item/Item'
+import NotFound from './pages/notFound/NotFound'
+import Profile from './pages/profile/Profile'
 
 class App extends Component{
 
   state = {
-    name: sessionStorage.getItem('name') || '',
-    preferences: sessionStorage.getItem('preferences') || ''
+    name: sessionStorage.getItem('name') || ''
   }
 
   isLoggedIn = () =>{
@@ -22,7 +23,6 @@ class App extends Component{
   saveUser = (name, preferences) => {
     this.setState({ name, preferences })
     sessionStorage.setItem('name', name)
-    sessionStorage.setItem('preferences', preferences)
     this.props.history.push('/landing')
   }
 
@@ -33,14 +33,17 @@ class App extends Component{
   }
 
   render(){
+    const redTheme = createMuiTheme({ palette: { primary: red } })
     return (
-      <Switch>
-        <Route exact path='/' render={() => this.isLoggedIn() ? <Redirect to='/landing' /> : <Home saveUser={this.saveUser}/> } />
-        <Route exact path='/landing' render={() => !this.isLoggedIn() ? <Redirect to='/' /> : <Landing logout={this.logout} logout={this.logout}/>} />
-        <Route exact path='/item/' render={() => this.isLoggedIn() ? <Item /> : <Redirect to="/" />} />
-        <Route exact path='/profile' render={() => this.isLoggedIn() ? <Profile /> : <Redirect to="/" />} />
-        <Route path='/' render={() => <NotFound />}/> 
-      </Switch>
+      <MuiThemeProvider theme={redTheme}>
+        <Switch>
+          <Route exact path='/' render={() => this.isLoggedIn() ? <Redirect to='/landing' /> : <Home saveUser={this.saveUser}/> } />
+          <Route exact path='/landing' render={() => !this.isLoggedIn() ? <Redirect to='/' /> : <Landing logout={this.logout}/>} />
+          <Route exact path='/item/:id' render={() => this.isLoggedIn() ? <Item /> : <Redirect to="/" />} />
+          <Route exact path='/profile' render={() => this.isLoggedIn() ? <Profile /> : <Redirect to="/" />} />
+          <Route path='/' render={() => <NotFound />}/> 
+        </Switch>
+      </MuiThemeProvider>
     );
   }
 }
