@@ -17,7 +17,7 @@ const SuperHero = () => {
         logic.retrieveCharacterByName(superHero)
             .then(res => {
                 console.log('test')
-                if(res.data.count > 0) {
+                if(res && res.data && res.data.count > 0) {
                     setError('')
                     setResult(res.data)
                     setSuperHero('')
@@ -26,6 +26,7 @@ const SuperHero = () => {
                 else {
                     setShowModal(true)
                     setResult('')
+                    setSuperHero('')
                     setError('Hero not found')
                 }
             })
@@ -62,7 +63,10 @@ const SuperHero = () => {
                 {result ? 
                     <div className="modal-item">
                         <h2>{result.results[0].name}</h2>
-                        <p>{result.results[0].description}</p>
+                        {   result.results[0].description 
+                                ? <p>{result.results[0].description}</p>
+                                : <p>This character don´t have description</p>
+                        }
                         <img src={`${result.results[0].thumbnail.path}.${result.results[0].thumbnail.extension}`}/>
                     </div>
                     : <p>{error}</p>

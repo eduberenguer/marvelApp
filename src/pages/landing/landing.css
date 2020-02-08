@@ -1,3 +1,16 @@
+.container-header-landing{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    height: 70%;
+}
+
+.container-header-landing button{
+    height: 50%;
+}
+
 .container-items{
     display: flex;
     justify-content: center;
@@ -14,7 +27,7 @@
 
 .name-title{
     text-align: left;
-    margin-left: auto;
+    margin-left: 0.6em;
 }
 
 .item{

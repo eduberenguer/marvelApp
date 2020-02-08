@@ -21,7 +21,7 @@ const StartWith = (props) => {
     return(
         <div className="container-startWith">
             <form onSubmit={(e) => searchStartWith(e)}>
-                <h4>Inteligent findes. Write a initial letter:</h4>
+                <h4>Smart searcher. Write the letter/s why you want to search:</h4>
                 <TexField 
                     type='text' 
                     label='Inteligent search...' 
@@ -31,7 +31,6 @@ const StartWith = (props) => {
                 <Button type='submit' variant="contained" color="primary">Search!</Button>
                 <Button onClick={(e) => resetStartWith(e)} variant="contained" color="primary">Reset</Button>
             </form>
-            
         </div>
     )
 }

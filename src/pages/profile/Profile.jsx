@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import './profile.css'
 import TexField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
+import Header from '../../components/header/Header'
 
 
 const Profile = (props) => {
@@ -16,14 +17,16 @@ const Profile = (props) => {
     }
 
     return (
-        <div className="container-profile">
-            <Link to={'/landing'}>Return</Link>
-            <h1>Profile</h1>
-            <form onSubmit={saveChanges}>
-                <h3>Change Name</h3>
-                <TexField type="text" name="newName" placeholder='New name...' onChange={(e) => setNewName(e.target.value)}/>
-                <Button variant="contained" color='primary'>Save</Button>
-            </form>
+        <div>
+            <Header />
+            <div className="container-profile">
+                <h1>Profile</h1>
+                <form onSubmit={saveChanges}>
+                    <h3>Change Name</h3>
+                    <TexField type="text" name="newName" placeholder='New name...' onChange={(e) => setNewName(e.target.value)}/>
+                    <Button variant="contained" color='primary' type='submit'>Save</Button>
+                </form>
+            </div>
         </div>
     )
 }

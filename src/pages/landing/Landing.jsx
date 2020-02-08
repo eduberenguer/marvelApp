@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { logic } from '../../logic/index'
 import './landing.css'
-import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 import Header from '../../components/header/Header'
 import SuperHero from '../../components/superHero/SuperHero'
 import StartWith from '../../components/startWith/StartWith'
+//mport Items from '../../components/items/items'
+const Items = React.lazy(() => import('../../components/items/items'));
+
 
 const Landing = (props) => {
     const [name, setName] = useState(sessionStorage.getItem('name'))
     const [characters, setCharacters] = useState('')
     const [startWith, setStartWith] = useState('')
     const [notResults, setNotResults] = useState('')
+    const [order, setOrder] = useState(true)
 
     useEffect(() => {
         retrieveCharacters()
@@ -22,16 +27,26 @@ const Landing = (props) => {
     const retrieveCharacters = () => {
         logic.retrieveCharacters()
             .then(res => {
-                if(res.data.count > 0) setCharacters(res)
+                if(res.data.count > 0) {
+                    setNotResults('')
+                    setCharacters(res)
+                }
                 else setNotResults('Upps.. no results')
         })
     }
 
     const changeOrder = () => {
-        logic.changeOrder()
+        if(order){
+            logic.changeOrder()
             .then(res => {
+                setOrder(false)
                 setCharacters(res)
             })
+        }else{
+            setOrder(true)
+            retrieveCharacters()
+        }
+        
     }
 
     const searchStartWith = (value) => {
@@ -39,6 +54,7 @@ const Landing = (props) => {
             logic.nameStartWith(value)
             .then(res => {
                 if(res.data.count > 0) {
+                    setNotResults('')
                     setCharacters(res)
                 }
                 else {
@@ -50,26 +66,32 @@ const Landing = (props) => {
             retrieveCharacters()
         }
     }
-
     return(
         <div>
-            <Header logout={props.logout}/>
-            <h1 className="name-title">Welcome, {name}</h1>
+            <Header logout={props.logout} showOptions={true}/>
+            <div className="container-header-landing">
+                <h1 className="name-title">Welcome, {name}</h1>
+                <Button 
+                    onClick={() => changeOrder()} 
+                    color='primary'
+                    variant="contained"
+                    >
+                        Change Order
+                    {
+                        order ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
+                    }
+                </Button>
+            </div>
             <div className="finders">
                 <SuperHero />
                 <StartWith searchStartWith={searchStartWith}/>
             </div>
-            <Button onClick={() => changeOrder()} color='primary'>Change Order</Button>
-            <div className="container-items">{
-                characters ? characters.data.results.map(character => {
-                    return <Card key={character.id} className="item" >
-                            <h2>{character.name}</h2>
-                            <Link to={`/item/${character.id}`}>
-                                <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`}/>
-                            </Link>
-                        </Card>
-                }) : <p>{notResults}</p>
-            }</div>
+            <Suspense fallback={<p className='loading'>Loading...</p>}>
+                {characters 
+                            ? <Items characters={characters} />
+                            : <Items notResults={notResults} />
+                }
+            </Suspense>
         </div>
     )
 }

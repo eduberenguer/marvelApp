@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 import './header.css'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -32,25 +32,40 @@ const Header = (props) => {
     return(
         <div className="container-header">
             <img src={logo}/>
-            <Button 
-                aria-controls="fade-menu" 
-                aria-haspopup="true" 
-                onClick={handleClick}
-                className="menu-header"
-                color='primary'
-                variant="contained">
-                Options
-            </Button>
-            <Menu
-                id="fade-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}>
-                <MenuItem onClick={goToProfile}>Profile</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
-            </Menu>
+            { props.showOptions ? 
+                <div>
+                    <Button 
+                        aria-controls="fade-menu" 
+                        aria-haspopup="true" 
+                        onClick={handleClick}
+                        className="menu-header"
+                        color='primary'
+                        variant="contained">
+                        Options
+                    </Button>
+                    <Menu
+                        id="fade-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={open}
+                        onClose={handleClose}
+                        TransitionComponent={Fade}>
+                        <MenuItem onClick={goToProfile}>Profile</MenuItem>
+                        <MenuItem onClick={logout}>Logout</MenuItem>
+                    </Menu>
+                </div>
+                : <Button 
+                    aria-controls="fade-menu" 
+                    aria-haspopup="true" 
+                    onClick={handleClick}
+                    className="menu-header"
+                    color='primary'
+                    variant="contained"
+                    onClick={() => props.history.push('/landing')}>
+                    Return
+                </Button>
+            }
+            
         </div> 
     )
 }

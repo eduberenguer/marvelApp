@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import './App.css';
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import red from '@material-ui/core/colors/red';
 
-import Home from './pages/home/Home'
-import Landing from './pages/landing/Landing'
-import Item from './pages/item/Item'
-import NotFound from './pages/notFound/NotFound'
-import Profile from './pages/profile/Profile'
+const Home = lazy(() => import('./pages/home/Home'));
+const Landing = lazy(() => import('./pages/landing/Landing'));
+const Item = lazy(() => import('./pages/item/Item'));
+const NotFound = lazy(() => import('./pages/notFound/NotFound'));
+const Profile = lazy(() => import('./pages/profile/Profile'));
 
 class App extends Component{
 
@@ -36,13 +36,15 @@ class App extends Component{
     const redTheme = createMuiTheme({ palette: { primary: red } })
     return (
       <MuiThemeProvider theme={redTheme}>
-        <Switch>
-          <Route exact path='/' render={() => this.isLoggedIn() ? <Redirect to='/landing' /> : <Home saveUser={this.saveUser}/> } />
-          <Route exact path='/landing' render={() => !this.isLoggedIn() ? <Redirect to='/' /> : <Landing logout={this.logout}/>} />
-          <Route exact path='/item/:id' render={() => this.isLoggedIn() ? <Item /> : <Redirect to="/" />} />
-          <Route exact path='/profile' render={() => this.isLoggedIn() ? <Profile /> : <Redirect to="/" />} />
-          <Route path='/' render={() => <NotFound />}/> 
-        </Switch>
+        <Suspense fallback={<div className='loading'>Loading...</div>}>
+          <Switch>
+            <Route exact path='/' render={() => this.isLoggedIn() ? <Redirect to='/landing' /> : <Home saveUser={this.saveUser}/> } />
+            <Route exact path='/landing' render={() => !this.isLoggedIn() ? <Redirect to='/' /> : <Landing logout={this.logout}/>} />
+            <Route exact path='/item/:id' render={() => this.isLoggedIn() ? <Item /> : <Redirect to="/" />} />
+            <Route exact path='/profile' render={() => this.isLoggedIn() ? <Profile /> : <Redirect to="/" />} />
+            <Route path='/' render={() => <NotFound />}/> 
+          </Switch>
+        </Suspense>
       </MuiThemeProvider>
     );
   }

@@ -1,0 +1,16 @@
+.container-items{
+    display: flex;
+    padding: 1em;
+}
+
+.container-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+}
+
+.container-item img{
+    width: 50%;
+}

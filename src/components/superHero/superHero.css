@@ -9,15 +9,20 @@
     width: 20em;
 }
 
-.modal-item{
+.modal{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 1em;
+}
+
+.modal-item{
+    padding: 2em;
+    background-color: #FFFFFF;
+    border: solid black 1px;
+    width: 70%;
 }
 
 .modal-item img{
-    width: 25em;
-    margin-bottom: 3em;
+    width: 80%;
 }
