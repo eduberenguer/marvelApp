@@ -31,7 +31,7 @@ const Header = (props) => {
 
     return(
         <div className="container-header">
-            <img src={logo}/>
+            <img src={logo} alt='logo'/>
             { props.showOptions ? 
                 <div>
                     <Button 
@@ -57,7 +57,6 @@ const Header = (props) => {
                 : <Button 
                     aria-controls="fade-menu" 
                     aria-haspopup="true" 
-                    onClick={handleClick}
                     className="menu-header"
                     color='primary'
                     variant="contained"

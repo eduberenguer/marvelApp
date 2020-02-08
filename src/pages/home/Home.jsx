@@ -8,7 +8,8 @@ import logo from '../../images/logo-home.png'
 class Home extends Component{
 
     state = {
-        name: ''
+        name: '',
+        emptyName: ''
     }
 
     handleChange = (e) => {
@@ -21,13 +22,18 @@ class Home extends Component{
     onSubmit = (e) => {
         e.preventDefault()
         const { name } = this.state
-        this.props.saveUser(name)
+        if(name){
+            this.setState({emptyName: ''})
+            this.props.saveUser(name)
+        }
+        this.setState({emptyName: 'Please, write your name'})
     }
 
     render(){
+        const { name, emptyName } = this.state
         return(
             <div className="container-home">
-                <img src={logo} />
+                <img src={logo} alt='logo'/>
                 <form onSubmit={this.onSubmit}>
                     <TexField 
                         label="Your Name"
@@ -37,6 +43,7 @@ class Home extends Component{
                     />
                     <Button type="submit" variant="contained" color='primary'>Go!</Button>
                 </form>
+            {!name ? <p className='emptyError'>{emptyName}</p> : ''}
             </div>
         )
     }

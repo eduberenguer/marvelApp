@@ -6,6 +6,7 @@ import ReactModal from 'react-modal'
 import Button from '@material-ui/core/Button';
 import TexField from '@material-ui/core/TextField'
 
+
 const SuperHero = () => {
     const [superHero, setSuperHero] = useState('')
     const [result, setResult] = useState('')
@@ -16,7 +17,6 @@ const SuperHero = () => {
         e.preventDefault()
         logic.retrieveCharacterByName(superHero)
             .then(res => {
-                console.log('test')
                 if(res && res.data && res.data.count > 0) {
                     setError('')
                     setResult(res.data)
@@ -42,12 +42,14 @@ const SuperHero = () => {
                     onChange={(e) => setSuperHero(e.target.value)}
                     className='container-input-superHero'
                     value={superHero}/>
-                <Button 
-                    type='submit'
-                    color='primary'
-                    variant="contained"
-                    >Search!
-                </Button>
+                <div>
+                    <Button 
+                        type='submit'
+                        color='primary'
+                        variant="contained"
+                        >Search!
+                    </Button>
+                </div>
             </form>
             <ReactModal 
                 isOpen={showModal}
@@ -67,7 +69,10 @@ const SuperHero = () => {
                                 ? <p>{result.results[0].description}</p>
                                 : <p>This character don´t have description</p>
                         }
-                        <img src={`${result.results[0].thumbnail.path}.${result.results[0].thumbnail.extension}`}/>
+                        <img 
+                            src={`${result.results[0].thumbnail.path}.${result.results[0].thumbnail.extension}`}
+                            alt={result.results[0].name}
+                        />
                     </div>
                     : <p>{error}</p>
                 }

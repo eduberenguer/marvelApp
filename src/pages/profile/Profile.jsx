@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
 import './profile.css'
 import TexField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import Header from '../../components/header/Header'
-
 
 const Profile = (props) => {
     const [newName, setNewName] = useState('')

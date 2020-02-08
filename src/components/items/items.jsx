@@ -7,7 +7,6 @@ const Items = (props) => {
     const [notResults, setNotResults] = useState(props.notResults)
 
     useEffect(()=> {
-        console.log(props)
         setCharacter(props.characters)
         setNotResults(props.notResults)
     },[props.characters || props.notResults])
@@ -15,11 +14,14 @@ const Items = (props) => {
     return(
         <div className="container-items">
             {
-                characters ? characters.data.results.map(character => {
+                characters ? characters.map(character => {
                     return <Card key={character.id} className="item" >
                             <h2>{character.name}</h2>
                             <Link to={`/item/${character.id}`}>
-                                <img src={`${character.thumbnail.path}.${character.thumbnail.extension}`}/>
+                                <img 
+                                    src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                                    alt={character.name}
+                                />
                             </Link>
                         </Card>
                         }) : <p>{notResults}</p>

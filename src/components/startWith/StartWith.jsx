@@ -28,8 +28,10 @@ const StartWith = (props) => {
                     value={startWithValue} 
                     className="container-input-startWith"
                     onChange={(e) => setStartWithValue(e.target.value)}/>
-                <Button type='submit' variant="contained" color="primary">Search!</Button>
-                <Button onClick={(e) => resetStartWith(e)} variant="contained" color="primary">Reset</Button>
+                <div>
+                    <Button type='submit' variant="contained" color="primary">Search!</Button>
+                    <Button onClick={(e) => resetStartWith(e)} variant="contained" color="primary">Reset</Button>
+                </div>
             </form>
         </div>
     )

@@ -26,7 +26,10 @@ const Item = (props) => {
                             {character.data.results[0].description 
                                 ? <p>{character.data.results[0].description}</p> 
                                 : <p>This character don´t have description</p>}
-                            <img src={`${character.data.results[0].thumbnail.path}.${character.data.results[0].thumbnail.extension}`}/>
+                            <img 
+                                src={`${character.data.results[0].thumbnail.path}.${character.data.results[0].thumbnail.extension}`}
+                                alt={character.data.results[0].name}
+                            />
                         </div> 
                         : ''
                 }

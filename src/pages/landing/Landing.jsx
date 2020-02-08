@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import React, { useState, useEffect, Suspense } from 'react'
+import { withRouter } from 'react-router-dom'
 import { logic } from '../../logic/index'
 import './landing.css'
 import Button from '@material-ui/core/Button';
@@ -9,7 +9,8 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import Header from '../../components/header/Header'
 import SuperHero from '../../components/superHero/SuperHero'
 import StartWith from '../../components/startWith/StartWith'
-//mport Items from '../../components/items/items'
+import SearchFilter from '../../components/searchWithFilter/SearchWithFilter'
+//import Items from '../../components/items/items'
 const Items = React.lazy(() => import('../../components/items/items'));
 
 
@@ -29,7 +30,7 @@ const Landing = (props) => {
             .then(res => {
                 if(res.data.count > 0) {
                     setNotResults('')
-                    setCharacters(res)
+                    setCharacters(res.data.results)
                 }
                 else setNotResults('Upps.. no results')
         })
@@ -40,7 +41,7 @@ const Landing = (props) => {
             logic.changeOrder()
             .then(res => {
                 setOrder(false)
-                setCharacters(res)
+                setCharacters(res.data.results)
             })
         }else{
             setOrder(true)
@@ -55,7 +56,7 @@ const Landing = (props) => {
             .then(res => {
                 if(res.data.count > 0) {
                     setNotResults('')
-                    setCharacters(res)
+                    setCharacters(res.data.results)
                 }
                 else {
                     setCharacters('')
@@ -66,6 +67,25 @@ const Landing = (props) => {
             retrieveCharacters()
         }
     }
+
+    const searchFilter = (limit, value) => {
+        if(limit && value){
+            logic.filterWithAppearances(limit, value)
+            .then(res => {
+                if(res.length) {
+                    setNotResults('')
+                    setCharacters(res)
+                }
+                else {
+                    setCharacters('')
+                    setNotResults('Upps.. no results with this filters')
+                }
+            })
+        }else{
+            retrieveCharacters()
+        }
+    }
+
     return(
         <div>
             <Header logout={props.logout} showOptions={true}/>
@@ -84,6 +104,7 @@ const Landing = (props) => {
             </div>
             <div className="finders">
                 <SuperHero />
+                <SearchFilter searchFilter={searchFilter}/>
                 <StartWith searchStartWith={searchStartWith}/>
             </div>
             <Suspense fallback={<p className='loading'>Loading...</p>}>
