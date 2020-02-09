@@ -10,7 +10,6 @@ import Header from '../../components/header/Header'
 import SuperHero from '../../components/superHero/SuperHero'
 import StartWith from '../../components/startWith/StartWith'
 import SearchFilter from '../../components/searchWithFilter/SearchWithFilter'
-//import Items from '../../components/items/items'
 const Items = React.lazy(() => import('../../components/items/items'));
 
 
@@ -108,9 +107,8 @@ const Landing = (props) => {
                 <StartWith searchStartWith={searchStartWith}/>
             </div>
             <Suspense fallback={<p className='loading'>Loading...</p>}>
-                {characters 
-                            ? <Items characters={characters} />
-                            : <Items notResults={notResults} />
+                {
+                    characters ? <Items characters={characters} /> : <Items notResults={notResults} />
                 }
             </Suspense>
         </div>
