@@ -12,7 +12,6 @@ import StartWith from '../../components/startWith/StartWith'
 import SearchFilter from '../../components/searchWithFilter/SearchWithFilter'
 const Items = React.lazy(() => import('../../components/items/items'));
 
-
 const Landing = (props) => {
     const [name, setName] = useState(sessionStorage.getItem('name'))
     const [characters, setCharacters] = useState('')
@@ -94,8 +93,7 @@ const Landing = (props) => {
                     onClick={() => changeOrder()} 
                     color='primary'
                     variant="contained"
-                    >
-                        Change Order
+                    >Change Order
                     {
                         order ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />
                     }
@@ -108,7 +106,7 @@ const Landing = (props) => {
             </div>
             <Suspense fallback={<p className='loading'>Loading...</p>}>
                 {
-                    characters ? <Items characters={characters} /> : <Items notResults={notResults} />
+                    characters ? <Items characters={characters}/> : <Items notResults={notResults} />
                 }
             </Suspense>
         </div>

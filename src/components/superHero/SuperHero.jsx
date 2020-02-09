@@ -38,7 +38,7 @@ const SuperHero = () => {
            <form onSubmit={(e) => searchHeroe(e)}>
                 <TexField 
                     type="text" 
-                    label="Your favourite superhero"
+                    label="Example: Thor..."
                     onChange={(e) => setSuperHero(e.target.value)}
                     className='container-input-superHero'
                     value={superHero}/>

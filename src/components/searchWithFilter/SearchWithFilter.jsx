@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 const SearchWithFilter = (props) => {
     const [limit, setLimit] = useState('')
-    const [type, setType] = useState('')
+    const [type, setType] = useState('comics')
 
     const search = (e) => {
         e.preventDefault()
@@ -18,7 +18,6 @@ const SearchWithFilter = (props) => {
 
     const resetSearch= (e) => {
         e.preventDefault()
-        setType('')
         setLimit('')
         props.searchFilter()
     }
@@ -46,11 +45,10 @@ const SearchWithFilter = (props) => {
                         label='Category'
                         id="demo-simple-select"
                         value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        >
-                        <MenuItem value={'comics'}>Comics</MenuItem>
-                        <MenuItem value={'series'}>Series</MenuItem>
-                        <MenuItem value={'stories'}>Stories</MenuItem>
+                        onChange={(e) => setType(e.target.value)}>
+                            <MenuItem value={'comics'}>Comics</MenuItem>
+                            <MenuItem value={'series'}>Series</MenuItem>
+                            <MenuItem value={'stories'}>Stories</MenuItem>
                     </Select>
                         <Button type='submit' variant="contained" color="primary">Search!</Button>
                         <Button onClick={(e) => resetSearch(e)} variant="contained" color="primary">Reset</Button>

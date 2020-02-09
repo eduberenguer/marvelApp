@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import Photocard from '../photoCard/Photocard'
+const Photocard = React.lazy(() => import('../photoCard/Photocard'));
 
 const Items = (props) => {
     const [characters, setCharacter] = useState(props.characters)
@@ -14,11 +14,13 @@ const Items = (props) => {
 
     return(
         <div className="container-items">
+            <Suspense fallback={<p className='loading'>Loading...</p>}>
             {
                 characters 
-                    ? characters.map(character => <Photocard key={character.id} {...character} />)
+                    ? characters.map(character => <Photocard key={character.id} {...character}/>)
                     : <p>{notResults}</p>
             }
+            </Suspense>
         </div>
     )
 }
