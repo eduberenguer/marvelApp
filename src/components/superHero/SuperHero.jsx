@@ -41,7 +41,7 @@ const SuperHero = () => {
           className="container-input-superHero"
           value={superHero}
         />
-        <div>
+        <div className="container-buttons">
           <Button type="submit" color="primary" variant="contained">
             Search!
           </Button>

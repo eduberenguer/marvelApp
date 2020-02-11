@@ -3,6 +3,7 @@ import "./generalStylesApp/App.css";
 import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
+import { FlapperSpinner } from "react-spinners-kit";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Landing = lazy(() => import("./pages/landing/Landing"));
@@ -12,7 +13,8 @@ const Profile = lazy(() => import("./pages/profile/Profile"));
 
 class App extends Component {
   state = {
-    name: sessionStorage.getItem("name") || ""
+    name: sessionStorage.getItem("name") || "",
+    loading: true
   };
 
   isLoggedIn = () => {
@@ -38,6 +40,7 @@ class App extends Component {
   };
 
   render() {
+    const { loading } = this.state;
     const redTheme = createMuiTheme({
       palette: {
         primary: red
@@ -45,7 +48,13 @@ class App extends Component {
     });
     return (
       <MuiThemeProvider theme={redTheme}>
-        <Suspense fallback={<div className="loading"> Loading... </div>}>
+        <Suspense
+          fallback={
+            <div className="loadingSpinner">
+              <FlapperSpinner size={50} color="#cb3234" loading={loading} />
+            </div>
+          }
+        >
           {" "}
           <Switch>
             <Route

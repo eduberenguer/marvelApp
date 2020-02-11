@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import { FlapperSpinner } from "react-spinners-kit";
 
 const Photocard = React.lazy(() => import("../photoCard/Photocard"));
 
@@ -10,6 +11,7 @@ const Items = props => {
 
   const [dataCharacters, setDataCharacter] = useState(characters);
   const [notResult, setNotResult] = useState(notResults);
+  const [loading] = useState(true);
 
   useEffect(() => {
     setDataCharacter(characters);
@@ -18,7 +20,16 @@ const Items = props => {
 
   return (
     <div className="container-items">
-      <Suspense fallback={<p className="loading">Loading...</p>}>
+      <Suspense
+        fallback={
+          <FlapperSpinner
+            className="loading"
+            size={100}
+            color="#cb3234"
+            loading={loading}
+          />
+        }
+      >
         {dataCharacters ? (
           dataCharacters.map(character => (
             <Photocard key={character.id} {...character} />

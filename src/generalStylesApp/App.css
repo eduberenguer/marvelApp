@@ -2,12 +2,11 @@
   text-align: center;
 }
 
-.loading {
+.loadingSpinner {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10em;
-  color: red;
 }
 
 .App-logo {
@@ -40,6 +39,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

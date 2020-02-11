@@ -45,7 +45,7 @@ const SearchWithFilter = props => {
             setLimit(e.target.innerText);
           }}
         />
-        <div>
+        <div className="container-buttons">
           <Select
             label="Category"
             id="demo-simple-select"
@@ -59,11 +59,7 @@ const SearchWithFilter = props => {
           <Button type="submit" variant="contained" color="primary">
             Search!
           </Button>
-          <Button
-            onClick={e => resetSearch(e)}
-            variant="contained"
-            color="primary"
-          >
+          <Button onClick={e => resetSearch(e)} variant="contained">
             Reset
           </Button>
         </div>

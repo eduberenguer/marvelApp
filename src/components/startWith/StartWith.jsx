@@ -26,20 +26,16 @@ const StartWith = props => {
         <h4>Smart searcher. Write the letter/s why you want to search:</h4>
         <TexField
           type="text"
-          label="Inteligent search..."
+          label="Intelligent search..."
           value={startWithValue}
           className="container-input-startWith"
           onChange={e => setStartWithValue(e.target.value)}
         />
-        <div>
+        <div className="container-buttons">
           <Button type="submit" variant="contained" color="primary">
             Search!
           </Button>
-          <Button
-            onClick={e => resetStartWith(e)}
-            variant="contained"
-            color="primary"
-          >
+          <Button onClick={e => resetStartWith(e)} variant="contained">
             Reset
           </Button>
         </div>

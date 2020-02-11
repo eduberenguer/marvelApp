@@ -9,3 +9,8 @@
 .container-searchWithFilter form .container-input-searchWithFilter {
     width: 20em;
 }
+
+.container-buttons{
+    display: flex;
+    justify-content: space-around;
+}

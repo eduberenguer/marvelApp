@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { logic } from "../../logic/index";
 import "./landing.css";
+import { FlapperSpinner } from "react-spinners-kit";
 import Button from "@material-ui/core/Button";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
@@ -19,6 +20,7 @@ const Landing = props => {
   const [startWith] = useState("");
   const [notResults, setNotResults] = useState("");
   const [order, setOrder] = useState(true);
+  const [loading] = useState(true);
 
   useEffect(() => {
     retrieveCharacters();
@@ -99,7 +101,16 @@ const Landing = props => {
         <SearchFilter searchFilter={searchFilter} />
         <StartWith searchStartWith={searchStartWith} />
       </div>
-      <Suspense fallback={<p className="loading">Loading...</p>}>
+      <Suspense
+        fallback={
+          <FlapperSpinner
+            className="loadingSpinner"
+            color="#cb3234"
+            size={100}
+            loading={loading}
+          />
+        }
+      >
         {characters ? (
           <Items characters={characters} />
         ) : (

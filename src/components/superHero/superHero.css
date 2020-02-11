@@ -9,6 +9,12 @@
   width: 20em;
 }
 
+.container-buttons{
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .modal {
   display: flex;
   justify-content: center;
