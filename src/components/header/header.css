@@ -1,4 +1,4 @@
-.container-header{
+.container-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,11 +6,11 @@
     border-bottom: 2px solid red;
 }
 
-.container-header .menu-header{
+.container-header .menu-header {
     margin-right: 2em;
     height: 50%;
 }
 
-.container-header img{
+.container-header img {
     width: 8em;
 }

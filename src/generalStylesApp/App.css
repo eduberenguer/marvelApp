@@ -2,12 +2,12 @@
   text-align: center;
 }
 
-.loading{
+.loading {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10em;
-  color:red;
+  color: red;
 }
 
 .App-logo {

@@ -1,9 +1,9 @@
-.container-startWith{
+.container-startWith {
     margin: 1em;
     display: flex;
     justify-content: center;
 }
 
-.container-startWith form .container-input-startWith{
+.container-startWith form .container-input-startWith {
     width: 20em;
 }

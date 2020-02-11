@@ -1,28 +1,39 @@
-import React, { useState, useEffect, Suspense } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useState, useEffect, Suspense } from "react";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Photocard = React.lazy(() => import('../photoCard/Photocard'));
+const Photocard = React.lazy(() => import("../photoCard/Photocard"));
 
-const Items = (props) => {
-    const [characters, setCharacter] = useState(props.characters)
-    const [notResults, setNotResults] = useState(props.notResults)
+const Items = props => {
+  const { characters } = props;
+  const { notResults } = props;
 
-    useEffect(()=> {
-        setCharacter(props.characters)
-        setNotResults(props.notResults)
-    },[props.characters || props.notResults])
+  const [dataCharacters, setDataCharacter] = useState(characters);
+  const [notResult, setNotResult] = useState(notResults);
 
-    return(
-        <div className="container-items">
-            <Suspense fallback={<p className='loading'>Loading...</p>}>
-            {
-                characters 
-                    ? characters.map(character => <Photocard key={character.id} {...character}/>)
-                    : <p>{notResults}</p>
-            }
-            </Suspense>
-        </div>
-    )
-}
+  useEffect(() => {
+    setDataCharacter(characters);
+    setNotResult(notResults);
+  }, [characters || notResult]);
 
-export default withRouter(Items)
+  return (
+    <div className="container-items">
+      <Suspense fallback={<p className="loading">Loading...</p>}>
+        {dataCharacters ? (
+          dataCharacters.map(character => (
+            <Photocard key={character.id} {...character} />
+          ))
+        ) : (
+          <p>{notResult}</p>
+        )}
+      </Suspense>
+    </div>
+  );
+};
+
+Items.propTypes = {
+  characters: PropTypes.array,
+  notResults: PropTypes.string
+};
+
+export default withRouter(Items);

@@ -1,4 +1,4 @@
-.container-searchWithFilter{
+.container-searchWithFilter {
     margin: 1em;
     display: flex;
     justify-content: center;
@@ -6,6 +6,6 @@
     flex-direction: column;
 }
 
-.container-searchWithFilter form .container-input-searchWithFilter{
+.container-searchWithFilter form .container-input-searchWithFilter {
     width: 20em;
 }

@@ -1,28 +1,28 @@
-.container-superHero{
-    margin: 1em;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.container-superHero {
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.container-superHero form .container-input-superHero{
-    width: 20em;
+.container-superHero form .container-input-superHero {
+  width: 20em;
 }
 
-.modal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.modal-item{
-    padding: 2em;
-    background-color: #FFFFFF;
-    border: solid black 1px;
-    width: 70%;
+.modal-item {
+  padding: 2em;
+  background-color: #ffffff;
+  border: solid black 1px;
+  width: 70%;
 }
 
-.modal-item img{
-    width: 80%;
+.modal-item img {
+  width: 80%;
 }
