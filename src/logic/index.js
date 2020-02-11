@@ -2,7 +2,7 @@ const API_KEY = "308380f1e2d8e65958399a33b80c395f";
 const HASH = "1ddab9dc072b466efe73d58410e85be8";
 
 const logic = {
-  retrieveCharacters(limit = 100) {
+  retrieveCharacters(limit = 50) {
     return fetch(
       `https://gateway.marvel.com:443/v1/public/characters?ts=9&apikey=${API_KEY}&hash=${HASH}&limit=${limit}`
     ).then(res => res.json());

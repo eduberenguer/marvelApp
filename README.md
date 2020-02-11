@@ -12,7 +12,7 @@ Features:
 - Search for a minimum of appearances in the different   categories
 - Look character details
 
-In this App i have used:  
+Technologies:  
 - React (16.12.0).  
 - React-Router-Dom  
 - Hooks in most components to save the app status  
