@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./header.css";
@@ -9,7 +9,7 @@ import Fade from "@material-ui/core/Fade";
 import logo from "../../images/logo-home.png";
 
 const Header = props => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = event => {

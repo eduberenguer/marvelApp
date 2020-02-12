@@ -5,8 +5,7 @@ import Card from "@material-ui/core/Card";
 
 const Photocard = props => {
   const { id, name } = props;
-  const { path } = props.thumbnail;
-  const { extension } = props.thumbnail;
+  const { path, extension } = props.thumbnail;
 
   return (
     <div>

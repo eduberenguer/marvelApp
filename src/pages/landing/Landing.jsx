@@ -106,7 +106,7 @@ const Landing = props => {
           <FlapperSpinner
             className="loadingSpinner"
             color="#cb3234"
-            size={100}
+            size={50}
             loading={loading}
           />
         }

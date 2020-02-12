@@ -6,8 +6,7 @@ import { FlapperSpinner } from "react-spinners-kit";
 const Photocard = React.lazy(() => import("../photoCard/Photocard"));
 
 const Items = props => {
-  const { characters } = props;
-  const { notResults } = props;
+  const { characters, notResults } = props;
 
   const [dataCharacters, setDataCharacter] = useState(characters);
   const [notResult, setNotResult] = useState(notResults);
@@ -24,7 +23,7 @@ const Items = props => {
         fallback={
           <FlapperSpinner
             className="loading"
-            size={100}
+            size={50}
             color="#cb3234"
             loading={loading}
           />
